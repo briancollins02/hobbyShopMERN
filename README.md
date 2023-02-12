@@ -5,3 +5,5 @@
 - In server/models place mongoose models.
 - I will set up apollo server with graphql.
 
+2/12/2023
+- You can work on the schema and mongoose models. Add more fields and relations between types. (Users have a list of orders that contains details about the products)
