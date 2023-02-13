@@ -35,8 +35,14 @@ const userSchema = new Schema({
     },
     orders: [
         {
-        type: Schema.Types.OrderId,
+        type: Schema.Types.ObjectId,
         ref: 'Order',
+        },
+    ],
+    cart: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Cart',
         },
     ],
 });

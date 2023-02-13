@@ -10,7 +10,7 @@ export default gql`
         password: String!
         isAdmin: Boolean
         orders: [Order]
-        cart: Cart
+        cartItems: [CartItem]
     }
     type Product{
         id: String!
@@ -24,7 +24,7 @@ export default gql`
         id: String!
         name: String!
     }
-    type Cart{
+    type CartItem{
         id: String!
         products: [Product]
     }
@@ -32,6 +32,7 @@ export default gql`
         id: String!
         #Apollo does not have date but we can use a string as the type.
         purchaseDate: String
+        orderStatus: String
         products: [Product!]
     }
     type Query{
