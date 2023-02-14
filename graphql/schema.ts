@@ -39,7 +39,6 @@ export default gql`
         user(id:String, email:String): User
         users: [User]
         product(id:String!): Product
-        products: [Product]
         category(id:String!): Category
         categories: [Category]
         cart(id:String!): Cart

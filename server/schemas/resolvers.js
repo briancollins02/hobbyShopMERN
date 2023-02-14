@@ -69,6 +69,43 @@ const resolvers = {
 
     Mutation: {
 
+        addUser: async(parent, args) => {
+            const { first_name, last_name, email, password } = args;
+            const user = await User.create({args, cart: {}});
+            const token = signToken(user);
+            return { token, user };
+        },
+
+        login: async(parent, { email, password }) => {
+            const user = await User.findOne({ email });
+
+            if (!user) {
+                throw new AuthenticationError('No user found with this email');
+            }
+
+            const correctPw = await user.isCorrectPassword(password);
+
+            if (!correctPw) {
+                throw new AuthenticationError('Incorrect credentials');
+            }
+
+            const token = singleToken(user);
+
+            return { token, user };
+        },
+
+        addOrder: async (parent, { products }, context) => {
+            if (context.user) {
+                const order = Order.create({ products });
+
+                await User.findByIdAndUpdate(context.user.id, {
+                    $push: { orders: order };
+                });
+
+                return order;
+            }
+            throw new AuthenticationError('Not logged in');
+        },
 
         addToCart: async(parent, { id }, context) => {
             if (context.user) {
