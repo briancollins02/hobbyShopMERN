@@ -7,3 +7,4 @@
 
 2/12/2023
 - You can work on the schema and mongoose models. Add more fields and relations between types. (Users have a list of orders that contains details about the products)
+-You can update the graphql/context, we need to implement the JWT verification.  

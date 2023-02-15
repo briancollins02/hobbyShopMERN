@@ -1,3 +1,6 @@
+import connectMongo from "@/db/connection";
+import User from "@/server/models/User";
+
 export default {
     Query: {
         user: () => {
@@ -35,6 +38,22 @@ export default {
         orders: () => {
             return {
             }
+        }
+    },
+    Mutation: {
+        createUser: async (parent:any, args:any, contextValue:any, info:any) => {
+          try {
+            const client = await connectMongo();
+            // const db = client.db("dragonpunk")
+            // const newUser = await db.collection("users").insertOne(args);
+            const newUser = await User.create(args)
+            console.log(newUser)
+            return newUser
+          } 
+          catch(err) {
+            console.log(err)
+            return null
+          }
         }
     }
 }
