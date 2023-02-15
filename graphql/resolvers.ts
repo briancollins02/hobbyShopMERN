@@ -8,6 +8,9 @@ export default {
         // return all categories
         categories: async () => {
             try {
+                //need to await mongoDB connection before doing operations on the models.
+                //we need to do this on every query and resolver function.
+                await connectMongo();
                 const categories = await Category.find({});
                 return categories
             }
