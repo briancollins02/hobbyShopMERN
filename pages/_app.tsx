@@ -6,11 +6,13 @@ import type { AppProps } from 'next/app'
 const fontMain = localFontOne({
   src: "../public/GloomyThings.ttf"
 })
-
+import Layout from '@/components/Layout'
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <div className = {fontMain.className}>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </div>
   )
 }
