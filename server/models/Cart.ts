@@ -1,6 +1,6 @@
-const { Schema, model } = requier('mongoose');
+import { Schema, model } from 'mongoose';
 
-const CartSchema = new Schema({
+const cartSchema = new Schema({
     userId: {
         type: String,
         required: true,
@@ -8,7 +8,7 @@ const CartSchema = new Schema({
     products: [
         {
             productId: {
-                type: Schema.Types.productId,
+                type: Schema.Types.ObjectId,
             },
             quantity: {
                 type: Number,
@@ -20,4 +20,4 @@ const CartSchema = new Schema({
 
 const Cart = model('Cart', cartSchema)
 
-module.exports = Cart;
+export default Cart;
