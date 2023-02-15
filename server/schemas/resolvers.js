@@ -1,5 +1,6 @@
-const { AuthenticationError } = requier('apollo-server-express');
-const { Cart, Category, Order, Product, User } = requier('../models');
+const { AuthenticationError } = require('apollo-server-express');
+const { Cart, Category, Order, Product, User } = require('../models');
+const { isTemplateExpression } = require('typescript');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -24,15 +25,17 @@ const resolvers = {
             return Product.find(params).populate('category');
         },
 
-        // return single product by Id
+    //     // return single product by Id
         product: async (parent, {id}) =>
             Product.findById(id).populate('category'),
 
-        // return single user by Id
+
+        users: async () => User.find({}),
+    //     // return single user by Id
         user: async (parent, args, context) => {
             if (context.user) {
                 const user = await User.findById(context.user.id).populate({
-                    path: 'orders.products',
+                    path: 'orders.product',
                     populate: 'category',
                 });
 
@@ -44,11 +47,11 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
-        // return all of a users previous orders
-        orders: async (parent, { id }, context) => {
+    //     // return all of a users previous orders
+        order: async (parent, { id }, context) => {
             if (context.user) {
                 const user = await User.findById(context.user.id).populate({
-                    path: 'orders.products',
+                    path: 'orders.product',
                     populate: 'category',
                 });
 
@@ -58,7 +61,7 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
-        // Desired Result: Go to User Cart Subdoc and view all 'cartItems' inside of the user cart
+    //     // Desired Result: Go to User Cart Subdoc and view all 'cartItems' inside of the user cart
         cart: async (parent, { id }, context) => {
             if (context.user) {
                 const user = await User.findById(context.user.id).select('cart');
@@ -69,48 +72,62 @@ const resolvers = {
 
     Mutation: {
 
-        addUser: async(parent, args) => {
-            const { first_name, last_name, email, password } = args;
-            const user = await User.create({args, cart: {}});
+        addUser: async(parent, { first_name, last_name, email, password }) => {
+            const user = await User.create({ first_name, last_name, email, password });
             const token = signToken(user);
             return { token, user };
         },
 
-        login: async(parent, { email, password }) => {
+        login: async (parent, { email, password }) => {
             const user = await User.findOne({ email });
-
+      
             if (!user) {
-                throw new AuthenticationError('No user found with this email');
+              throw new AuthenticationError('No user found with this email address');
             }
-
+      
             const correctPw = await user.isCorrectPassword(password);
-
+      
             if (!correctPw) {
-                throw new AuthenticationError('Incorrect credentials');
+              throw new AuthenticationError('Incorrect credentials');
             }
-
-            const token = singleToken(user);
-
+      
+            const token = signToken(user);
+      
             return { token, user };
         },
 
-        addOrder: async (parent, { products }, context) => {
-            if (context.user) {
-                const order = Order.create({ products });
-
-                await User.findByIdAndUpdate(context.user.id, {
-                    $push: { orders: order };
-                });
-
-                return order;
+        addOrder: async (parent, { product }, context) => {
+            const { userId } = context;
+            const user = await User.findById(userId).populate('cart.product');
+            
+            if (!context.user) {
+                throw new AuthenticationError('Not logged in');
             }
-            throw new AuthenticationError('Not logged in');
+            
+            const item = user.cart.map(product => {
+                return {
+                    productId: product.productId,
+                    quantity: product.quantity 
+                };
+            });
+
+            const order = new Order({
+                user: user._id,
+                product: item
+            });
+
+            await order.save();
+
+            user.cart = [{}];
+            await user.save();
+
+            return order;
         },
 
         addToCart: async(parent, { id }, context) => {
             if (context.user) {
                 const user = await User.findById(context.user.id);
-                user.cart.product.push({ productId, quantity });
+                user.cart.product.push({ _id, quantity });
                 await user.save();
 
                 return user.cart;
@@ -126,7 +143,6 @@ const resolvers = {
             }
         },
     }
+};
 
-}
-
-module.exports = { Query, Mutation };
+module.exports = resolvers;

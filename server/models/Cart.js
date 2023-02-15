@@ -1,18 +1,22 @@
-const { Schema, model } = requier('mongoose');
+const { Schema, model } = require('mongoose');
 
-const CartSchema = new Schema({
+const cartSchema = new Schema({
     userId: {
-        type: String,
+        type: Schema.Types.ObjectId,
+        ref: 'User',
         required: true,
     },
     product: [
         {
             productId: {
-                type: Schema.Types.productId,
+                type: Schema.Types.ObjectId,
+                ref: 'Product',
+                required: true,
             },
             quantity: {
                 type: Number,
                 default: 1,
+                required: true,
             },
         },
     ],
