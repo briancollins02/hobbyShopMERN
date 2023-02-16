@@ -1,7 +1,8 @@
 import connectMongo from "@/db/connection";
-import { ApolloServerErrorCode } from '@apollo/server/errors';
+import * as ApolloServerErrorCode from '@apollo/server/errors';
 import User from "@/server/models/User";
 import Category from "@/server/models/Category";
+import { authMiddleware, signToken } from "@/server/utils/auth";
 
 export default {
     Query: {
@@ -81,18 +82,55 @@ export default {
     //     },
 
     Mutation: {
-        createUser: async (parent: any, args: any, contextValue: any, info: any) => {
+        // createUser: async (parent: any, args: any, contextValue: any, info: any) => {
+        //     try {
+        //         const client = await connectMongo();
+        //         const newUser = await User.create(args)
+        //         console.log(newUser)
+        //         return newUser
+        //     }
+        //     catch (err) {
+        //         console.log(err)
+        //         return null
+        //     }
+        // },
+        addUser: async(parent: any, { first_name, last_name, email, password }: any) => {
             try {
-                const client = await connectMongo();
-                const newUser = await User.create(args)
-                console.log(newUser)
-                return newUser
+                await connectMongo();
+                const user = await User.create({ first_name, last_name, email, password });
+                const token = signToken(user);
+                return { token, user };
             }
             catch (err) {
                 console.log(err)
                 return null
             }
-        }
+        },
+        login: async (parent: any, { email, password }: any) => {
+            try {
+                await connectMongo()
+                const user = await User.findOne({ email });
+        
+                if (!user) {
+                throw new AuthenticationError('No user found with this email address');
+                }
+        
+                const correctPw = await user.isCorrectPassword(password);
+        
+                if (!correctPw) {
+                throw new AuthenticationError('Incorrect credentials');
+                }
+        
+                const token = signToken(user);
+        
+                return { token, user };
+            }
+            catch (err) {
+                console.log(err)
+                return null
+            }
+        },
+
         // addToCart: async(parent, { id }, context) => {
         //     if (context.user) {
         //         const user = await User.findById(context.user.id);
