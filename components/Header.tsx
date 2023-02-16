@@ -1,14 +1,8 @@
-import type { ReactNode } from "react"
-interface Props {
-    children?:ReactNode
-}
-const Header = (props:Props) => {
+const Header = () => {
     return (
-        <div>
-            <main>
-                {props.children}
-            </main>
-        </div>
+        <header>
+            
+        </header>
     )
 }
 export default Header;
