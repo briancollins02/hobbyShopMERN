@@ -22,9 +22,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <div>
-        <p>
-          {userDetails.name}
-        </p>
+        <h1>Dragonpunk</h1>
       </div>
     </>
   )
