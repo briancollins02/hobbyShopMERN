@@ -1,8 +1,11 @@
 import { ApolloServer } from "@apollo/server"
 import { startServerAndCreateNextHandler } from "@as-integrations/next"
-import { decode as queryStringDecode } from "node:querystring"
+
+import context from "@/graphql/context"
 import schema from "@/graphql/schema"
 import resolvers from "@/graphql/resolvers"
+
+
 
 const typeDefs = schema
 const server = new ApolloServer({ 
@@ -10,4 +13,6 @@ const server = new ApolloServer({
     typeDefs
 });
 
-export default startServerAndCreateNextHandler(server)
+export default startServerAndCreateNextHandler(server, {
+    // context
+})

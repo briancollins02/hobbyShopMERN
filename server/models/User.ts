@@ -1,7 +1,6 @@
-const { Schema, model } = require('mongoose');
-
-const bcrypt = require
-const Order = require('./Order');
+import mongoose, { Schema, model } from 'mongoose';
+import bcrypt from 'bcrypt';
+// import Order from './Order';
 
 const userSchema = new Schema({
     first_name: {
@@ -35,27 +34,25 @@ const userSchema = new Schema({
     },
     orders: [
         {
-        type: Schema.Types.OrderId,
+        type: Schema.Types.ObjectId,
         ref: 'Order',
         },
     ],
 });
 
 // before the user is created or password is modified and saved, the password is hashed
-userSchema.pre('save', async function (next) {
+userSchema.pre('save', async function () {
     if (this.isNew || this.isModified('password')) {
         const saltRounds = 10;
         this.password = await bcrypt.hash(this.password, saltRounds);
     }
-
-    next();
 });
 
 // use bcrypt to check inputted password to encrypted password when logging in
-userSchema.method.isCorrectPassword = async function (password) {
-    await bcrypt.compare(password, this.password);
-};
+// userSchema.method.isCorrectPassword = async function (password) {
+//     await bcrypt.compare(password, this.password);
+// };
 
-const User = model('User', userSchema);
+const User:any = mongoose.models.User || model('User', userSchema);
 
-module.exports = User;
+export default User;
