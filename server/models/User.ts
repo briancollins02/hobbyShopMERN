@@ -41,17 +41,19 @@ const userSchema = new Schema({
 });
 
 // before the user is created or password is modified and saved, the password is hashed
-userSchema.pre('save', async function () {
+userSchema.pre('save', async function (next) {
     if (this.isNew || this.isModified('password')) {
-        const saltRounds = 10;
-        this.password = await bcrypt.hash(this.password, saltRounds);
+      const saltRounds = 10;
+      this.password = await bcrypt.hash(this.password, saltRounds);
     }
-});
+  
+    next();
+  });
 
 // use bcrypt to check inputted password to encrypted password when logging in
-// userSchema.method.isCorrectPassword = async function (password) {
-//     await bcrypt.compare(password, this.password);
-// };
+userSchema.methods.isCorrectPassword = async function (password: any) {
+    return bcrypt.compare(password, this.password);
+  };
 
 const User:any = mongoose.models.User || model('User', userSchema);
 

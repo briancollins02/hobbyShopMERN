@@ -1,9 +1,11 @@
 import mongoose, { Schema, model } from 'mongoose';
+import dateFormat from '@/server/utils/dateFormat'
 
 const orderSchema = new Schema({
   purchaseDate: {
     type: Date,
     default: Date.now,
+    get: (timestamp: any) => dateFormat(timestamp)
   },
   products: [
     {
