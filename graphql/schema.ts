@@ -50,4 +50,14 @@ export default gql`
         order(id:String!): Order
         orders: [Order]
     }
+    type Mutation{
+        createUser(
+            first_name: String!
+            last_name: String!
+            address: String!
+            email: String!
+            password: String!
+            isAdmin: Boolean
+        ): User
+    }
 `

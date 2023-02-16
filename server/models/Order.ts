@@ -1,6 +1,4 @@
-const { Schema, model } = require('mongoose');
-const { PerformanceNodeTiming } = require('perf_hooks');
-const dateFormat = require('../utils/dateFormat');
+import mongoose, { Schema, model } from 'mongoose';
 
 const orderSchema = new Schema({
   purchaseDate: {
@@ -21,6 +19,6 @@ const orderSchema = new Schema({
   ],
 });
 
-const Order = model('Order', orderSchema);
+const Order = mongoose.models.Order || model('Order', orderSchema);
 
-module.exports = Order;
+export default Order;

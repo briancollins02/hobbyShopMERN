@@ -1,15 +1,28 @@
-const { AuthenticationError } = require('apollo-server-express');
-const { Cart, Category, Order, Product, User } = require('../server/models');
-const { isTemplateExpression } = require('typescript');
-const { signToken } = require('../server/utils/auth');
+import connectMongo from "@/db/connection";
+import { ApolloServerErrorCode } from '@apollo/server/errors';
+import User from "@/server/models/User";
+import Category from "@/server/models/Category";
+import { authMiddleware, signToken } from "@/server/utils/auth"
+import { isConstValueNode } from "graphql";
 
 export default {
     Query: {
         // return all categories
-        categories: async () => Category.find({}),
+        categories: async () => {
+            try {
+                //need to await mongoDB connection before doing operations on the models.
+                //we need to do this on every query and resolver function.
+                await connectMongo();
+                const categories = await Category.find({});
+                return categories
+            }
+            catch (err) {
+                console.log(err);
+            }
+        },
 
         // return all products
-        products: async (parent, {category, name }) => {
+        products: async (parent: any, { category, name }) => {
             const params = {};
 
             if (category) {
@@ -30,7 +43,7 @@ export default {
             Product.findById(id).populate('category'),
 
         // return single user by Id
-        user: async (parent, args, context) => {
+        user: async (parent: any, args: any, context: any) => {
             if (context.user) {
                 const user = await User.findById(context.user.id).populate({
                     path: 'orders.product',
@@ -68,12 +81,33 @@ export default {
         }
     },
 
+    // Mutation: {
+    //     createUser: async (parent: any, args: any, contextValue: any, info: any) => {
+    //         try {
+    //             const client = await connectMongo();
+    //             const newUser = await User.create(args)
+    //             console.log(newUser)
+    //             return newUser
+    //         }
+    //         catch (err) {
+    //             console.log(err)
+    //             return null
+    //         }
+    //     }
+
     Mutation: {
 
-        addUser: async(parent, args) => {
-            const user = await User.create({args, cart: {}});
-            const token = signToken(user);
-            return { token, user };
+        addUser: async(parent: any, args: any) => {
+            try {
+                await connectMongo();
+                const newUser = await User.create({args, cart: {}});
+                const token = signToken(newUser);
+                return { token, newUser };
+            }
+            catch (err) {
+                console.log(err)
+                return null
+            }
         },
 
         login: async(parent, { email, password }) => {
