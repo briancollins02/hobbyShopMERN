@@ -56,6 +56,17 @@ export default gql`
         order(id:String!): Order
         orders: [Order]
     }
+<<<<<<< HEAD
+    type Mutation{
+        createUser(
+            first_name: String!
+            last_name: String!
+            address: String!
+            email: String!
+            password: String!
+            isAdmin: Boolean
+        ): User
+=======
     type Mutation {
         addUser(
             first_name: String!
@@ -74,5 +85,6 @@ export default gql`
         ): User
         updateProduct(_id: ID!, quantity: Int!): Product
         login(email: String!, password: String!): Auth
+>>>>>>> d3b230df824854f48160d2470716a0e2c8f79ab0
     }
 `
