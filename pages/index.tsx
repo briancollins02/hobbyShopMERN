@@ -10,7 +10,8 @@ const userDetails:UserDetails = {
       "hasBeenDelivered": true,
       "name": "Mork Borg",
     }
-  ]
+  ],
+   "cart": [] 
 }
 
 export default function Home() {

@@ -18,6 +18,7 @@ const Header = () => {
                     <p>{userContext.user.name}</p>
                     <button>
                         Cart
+                        <span>{userContext.user.cart.length}</span>
                     </button>
                     <button onClick = {handleLogout}>
                         Logout

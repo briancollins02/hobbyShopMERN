@@ -23,3 +23,16 @@ body {
   max-width: 100vw;
   min-height: 100vh;
 }
+
+.product-preview {
+  border: 2px solid black;
+}
+
+.product-preview-image {
+  height:20rem;
+}
+.product-preview-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

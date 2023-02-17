@@ -6,6 +6,7 @@ export interface Order{
 export interface UserDetails{
     name: string;
     age: number;
-    pastOrders: Order[]; 
+    pastOrders: Order[];
+    cart:any;
   }
   
