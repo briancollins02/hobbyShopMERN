@@ -18,7 +18,8 @@ const Page = () => {
             //TODO: connect this to an authentication service
             const dummyUser = {
                 name: "randomUser",
-                isAdmin: true
+                cart: [],
+                isAdmin: false
             }
             userContext.setUser(
                 dummyUser
