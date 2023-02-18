@@ -1,19 +1,6 @@
 import type { UserDetails } from '@/types'
 import Head from 'next/head'
 
-const userDetails:UserDetails = {
-  "name": "randomname",
-  "age": 1000032,
-  "pastOrders": [
-    {
-      "id": 1,
-      "hasBeenDelivered": true,
-      "name": "Mork Borg",
-    }
-  ],
-   "cart": [] 
-}
-
 export default function Home() {
   return (
     <>
@@ -22,8 +9,10 @@ export default function Home() {
         <meta name="description" content="A Hobby Shop with Games, Music and more." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <div>
-        <h1>Dragonpunk</h1>
+      <div className = "splash-page">
+        <div className = "splash-page-hero">
+          <h1>Dragonpunk</h1>
+        </div> 
       </div>
     </>
   )

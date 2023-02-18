@@ -36,3 +36,51 @@ body {
   height: 100%;
   object-fit: contain;
 }
+
+.cart-preview {
+  top: 0;
+  left: 0;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-preview-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: aliceblue;
+  width: 75%;
+  height: 75%;
+  overflow: scroll;
+  padding: 2rem 1rem;
+  border-radius: 1rem;
+}
+
+.splash-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@keyframes splash-hero {
+  0%{
+    transform: scale(0.75);
+  }
+  50%{
+    transform: scale(1.25);
+  }  
+  100%{
+    transform: scale(0.75);
+  }
+}
+
+.splash-page-hero {
+  font-size: 10rem;
+  animation: splash-hero 4s ease-in-out infinite;
+}

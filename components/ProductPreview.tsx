@@ -1,4 +1,11 @@
-const ProductPreview = (props:any) => {
+interface Props {
+    name:string;
+    description:string;
+    price:number;
+    quantity:number;
+    images:string[];
+}
+const ProductPreview = (props:Props) => {
     return(
         <div className = "product-preview">
             <div>
