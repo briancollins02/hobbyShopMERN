@@ -8,18 +8,24 @@ const productSchema = new Schema({
     },
     description: {
         type: String,
-        required: true,
-        unique: true,
     },
-    image: {
+    images: {
         // Images are stored on a server. The path to that image is stored in the db
-        type: String,
+        type: [String],
         required: true,
     },
     price: {
         type: Number,
         required: true,
         min: 0.99,
+    },
+    stripe_product_id: {
+        type: String,
+        required: true
+    },
+    stripe_product_price_id: {
+        type: String,
+        required: true
     },
     quantity: {
         type: Number,
