@@ -12,7 +12,6 @@ if (!cachedConnection){
     cachedConnection = {conn:null, promise:null}
 }
 export default async () => {
-    console.log("cached connection", cachedConnection)
     // if there is a connection to the database then return the previously used connection
     if (cachedConnection && cachedConnection.conn) {
         return cachedConnection.conn
