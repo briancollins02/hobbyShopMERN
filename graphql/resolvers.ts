@@ -6,6 +6,7 @@ import Product from "@/server/models/Product";
 import Category from "@/server/models/Category";
 import { authMiddleware, signToken } from "@/server/utils/auth";
 import Stripe from 'stripe';
+import { argumentsObjectFromField } from "@apollo/client/utilities";
 // const stripe = loadStripe(process.env.STRIPE_PKEY!);
 const stripe = new Stripe( process.env.STRIPE_ACCESS_KEY!, {
  apiVersion:"2022-11-15"
@@ -128,6 +129,7 @@ export default {
                 console.log("STRIPEPRODUCT", stripeProduct);
                 const product = await Product.create({
                     ...args, 
+                    price: Number(args.price),
                     category: category._id.valueOf(),
                     stripe_product_id: stripeProduct.id,
                     stripe_product_price_id: stripeProduct.id
@@ -139,13 +141,30 @@ export default {
                 console.log(err)
                 return null
             }
+        }, 
+        updateProduct: async (parent: any, args:any) => {
+            try{
+                const updateProduct = await Product.findOneAndUpdate({_id:args.id}, {...args}, {new:true});
+                console.log(updateProduct);
+                //update stripe here
+                return updateProduct;
+            }
+            catch(err){
+                console.log(err)
+                return null
+            }
+        },  
+        deleteProduct: async (parent: any, args:any) => {
+            const deleteProduct = await Product.findOneAndDelete({_id:args.id});
+                console.log(deleteProduct);
+                //update stripe here
+                return "success";
         },     
-        addUser: async (parent: any, { first_name, last_name, email, password }: any) => {
+        addUser: async (parent: any, args:any) => {
             try {
                 await connectMongo();
-                const user = await User.create({ first_name, last_name, email, password });
-                const token = signToken(user);
-                return { token, user };
+                const user = await User.create({...args});
+                return user;
             }
             catch (err) {
                 console.log(err)

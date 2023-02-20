@@ -1,11 +1,38 @@
 import AddProduct from "@/components/AddProduct"
 import { useState } from "react"
-import { Products } from "@/lib/dummy-data"
 import ProductPreview from "@/components/ProductPreview"
-export const getServerSideProps = () => {
-    return {
-        props:{
-            products:Products
+import graphqlClient from "@/lib/graphql-client";
+import gql from "graphql-tag";
+import UpdateProductWrapper from "@/components/UpdateProductWrapper";
+export const getServerSideProps = async () => {
+    const query = gql`
+        query Query {
+            products {
+                description
+                id
+                images
+                name
+                price
+                quantity
+                stripe_product_id
+                stripe_product_price_id
+            }
+        }
+    `
+    try {
+        const data = await graphqlClient.request(query);
+        return {
+            props: {
+                products: data.products
+            }
+        }
+    }
+    catch (err) {
+        console.log(err);
+        return {
+            props: {
+                products: []
+            }
         }
     }
 }
@@ -16,9 +43,9 @@ const Page = (props:any) => {
         setShowAddProduct(true) 
     }
     const renderProductsPreview = () => {
-        return products.map((product:any)=>{
+        return products.reverse().map((product:any)=>{
             // key prop and generic props
-            return <ProductPreview key={product.id} {...product}/>
+            return <UpdateProductWrapper key={product.id} product={product}/>
         })
     }
     return (

@@ -15,7 +15,7 @@ const Page = () => {
             console.log(values)
             const mutation = gql`
             mutation Mutation($firstName: String!, $lastName: String!, $address: String!, $email: String!, $password: String!, $isAdmin: Boolean) {
-                createUser(first_name: $firstName, last_name: $lastName, address: $address, email: $email, password: $password, isAdmin: $isAdmin) 
+                addUser(first_name: $firstName, last_name: $lastName, address: $address, email: $email, password: $password, isAdmin: $isAdmin) 
             {
                 id
                 first_name

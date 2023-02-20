@@ -4,9 +4,13 @@ export interface Order{
     name: string;
   }
 export interface UserDetails{
-    name: string;
-    age: number;
-    pastOrders: Order[];
-    cart:any;
+    id: string
+    first_name: string
+    last_name: string
+    address: string
+    email: string
+    password: string
+    isAdmin: boolean
+    cart: any
   }
   

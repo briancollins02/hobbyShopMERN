@@ -65,7 +65,9 @@ export default gql`
             last_name: String!
             email: String!
             password: String!
-        ): Auth
+            address: String!
+            isAdmin: Boolean
+        ): User
         addToCart(product: ID!, quantity: Int!): Cart
         removeFromCart(product: ID!): Cart
         addOrder(product: [ID]!): Order
@@ -83,7 +85,18 @@ export default gql`
             category: String!
             images: [String]
         ): Product
-        updateProduct(_id: ID!, quantity: Int!): Product
+        updateProduct(
+            id: ID!
+            name: String
+            description: String
+            price: Float
+            quantity: Int
+            category: String
+            images: [String]
+        ): Product
+        deleteProduct(
+            id: ID!
+        ): String
         login(email: String!, password: String!): Auth
     }
 `

@@ -16,19 +16,30 @@ const Page = () => {
         onSubmit: async (values) => {
             console.log(values)
             //TODO: connect this to an authentication service
-            const dummyUser = {
-                name: "randomUser",
-                cart: [],
-                isAdmin: false
+            try {
+                const loginResponse = await fetch("/api/auth", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type":"application/json"
+                    },
+                    body: JSON.stringify({email:values.email, password:values.password})
+                })
+                const loginData = await loginResponse.json();
+                console.log(loginData);
+    
+                userContext.setUser(
+                    {...loginData.user, cart:[]}
+                )
+                if (loginData.user.isAdmin) {
+                    router.push("/admin/dashboard");
+                }
+                else {
+                    router.push("/search");
+                }
             }
-            userContext.setUser(
-                dummyUser
-            )
-            if (dummyUser.isAdmin) {
-                router.push("/admin/dashboard");
-            }
-            else {
-                router.push("/search");
+            catch (err) {
+                console.log(err);
+                alert("Failed to login.")
             }
         }
     });
