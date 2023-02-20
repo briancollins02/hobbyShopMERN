@@ -42,8 +42,8 @@ function CartPreview(props: any) {
         }
     };
     return (
-        <div className="cart-preview">
-            <div className="cart-preview-inner">
+        <div className="modal">
+            <div className="modal-inner">
                 {renderProducts()}
                 <button onClick={handleCartPreview}>
                     Close

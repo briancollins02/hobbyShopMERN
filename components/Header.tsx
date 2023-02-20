@@ -11,16 +11,25 @@ const Header = () => {
     const handleCartPreview = () => {
         setCartPreview(true)
     }
-    const handleLogout = () => {
-        userContext.setUser(null);
-        router.push("/");
+    const handleLogout = async () => {
+        try {
+            const logOutResponse = await fetch("/api/auth", {
+                method: "DELETE"
+            })
+            const logOutData = await logOutResponse.json();
+            userContext.setUser(null);
+            router.push("/");   
+        } catch (err) {
+            console.log(err);
+            alert("Can not log out.")
+        }
     }
     return (
         <header>
             {
                 userContext && userContext.user?
                 <div>
-                    <p>{userContext.user.name}</p>
+                    <p>{userContext.user.first_name}</p>
                     <button onClick = {handleCartPreview}>
                         Cart
                         <span>{userContext.user.cart.length}</span>
