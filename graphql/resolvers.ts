@@ -42,6 +42,12 @@ export default {
                 return null;
             }
         },
+        user: async (parent: any, args:any, context:any, info:any) => {
+            if (!context.user){
+                return null
+            }
+            return context.user
+        }
     },
 
     //         // return all products

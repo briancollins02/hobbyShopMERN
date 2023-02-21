@@ -13,10 +13,11 @@ const Header = () => {
     }
     const handleLogout = async () => {
         try {
-            const logOutResponse = await fetch("/api/auth", {
-                method: "DELETE"
-            })
-            const logOutData = await logOutResponse.json();
+            // const logOutResponse = await fetch("/api/auth", {
+            //     method: "DELETE"
+            // })
+            // const logOutData = await logOutResponse.json();
+            localStorage.removeItem("authToken");
             userContext.setUser(null);
             router.push("/");   
         } catch (err) {
