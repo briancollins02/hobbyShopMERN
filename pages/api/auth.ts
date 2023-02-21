@@ -4,6 +4,15 @@ import User from "@/server/models/User";
 import { serialize } from "cookie";
 
 export default async function handler(req: any, res: any) {
+    if (req.method === "GET") {
+        try {
+            res.json({headers:req.headers});
+        }
+        catch(err) {
+            console.log(err)
+            res.status(500).json({err:"Can not authorize"})
+        }
+    }
     if (req.method === "POST") {
 
         try {
@@ -18,9 +27,9 @@ export default async function handler(req: any, res: any) {
                 return
             }
             const authToken = jwt.sign({ id: foundUser.id, email: foundUser.email }, process.env.JWT_SECRET!);
-            const cookies = serialize("authToken", authToken, { httpOnly: true });
-            res.setHeader("Set-Cookie", cookies);
-            res.status(200).json({ user: foundUser });
+            // const cookies = serialize("authToken", authToken, { httpOnly: true });
+            // res.setHeader("Set-Cookie", cookies);
+            res.status(200).json({ user: foundUser, authToken });
         }
         catch (err) {
             console.log(err)
