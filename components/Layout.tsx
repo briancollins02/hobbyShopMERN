@@ -1,8 +1,11 @@
 import type { ReactNode } from "react"
 import { useState, useEffect } from "react"
 import { UserProvider } from "@/lib/client-context"
+
+// Import components
 import Header from "./Header"
 import Footer from "./Footer"
+
 import graphqlClient from "@/lib/graphql-client";
 import gql from "graphql-tag";
 

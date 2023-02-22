@@ -3,6 +3,7 @@ import { UserContext } from "@/lib/client-context";
 import Link from "next/link" 
 import {useRouter} from "next/router";
 import CartPreview from "@/components/CartPreview";
+
 const Header = () => {
     const router = useRouter()
     const userContext = useContext(UserContext);
@@ -26,7 +27,7 @@ const Header = () => {
         }
     }
     return (
-        <header>
+        <header className="header">
             {
                 userContext && userContext.user?
                 <div>
@@ -41,11 +42,11 @@ const Header = () => {
                     {cartPreview && <CartPreview setCartPreview = {setCartPreview}/>}
                 </div>
                 :
-                <div>
-                    <Link href = "/sign-up">
+                <div className="links-container">
+                    <Link href = "/sign-up" className="login-and-sign-up">
                         Sign Up
                     </Link>
-                    <Link href = "/log-in">
+                    <Link href = "/log-in" className="login-and-sign-up">
                         Login
                     </Link>
                 </div>
