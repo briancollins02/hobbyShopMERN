@@ -10,7 +10,7 @@ import {useRouter} from "next/router";
 import CartPreview from "@/components/CartPreview";
 
 
-const Navigation = (props) => {
+const Navigation = (props: any) => {
 
     const router = useRouter()
     const userContext = useContext(UserContext);
@@ -56,10 +56,10 @@ const Navigation = (props) => {
                     {navButtons.map((navButton) => (
                         <ul>
                             <Link href = "/sign-up" className={props.currentPage === navButton ? "nav-item is-active" : "nav-item"}key={navButton}>
-                                {navButton}
+                                Sign Up
                             </Link>
                             <Link href = "/log-in" className={props.currentPage === navButton ? "nav-item is-active" : "nav-item"}key={navButton}>
-                                {navButton}
+                                Login
                             </Link>
                         </ul>
                     ))}

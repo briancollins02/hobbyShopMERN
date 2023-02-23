@@ -8,7 +8,7 @@ const Header = () => {
 
     const [currentNav, handleNavChange] = useState("About");
 
-    const renderNav = () => {
+    const renderNav = (currentNav: any) => {
         switch(currentNav) {
             case 'Sign Up':
 
