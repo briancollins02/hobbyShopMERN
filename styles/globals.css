@@ -39,7 +39,12 @@ body {
 .links-container {
   height: 100%;
 }
-.login-and-sign-up {
+
+.links-container-div {
+  height: 100%;
+}
+
+.nav-item {
   display: inline-block;
   color: var(--bgcolor);
   list-style-type: none;
@@ -49,6 +54,14 @@ body {
   margin-left: 2%;
   margin-right: 2%;
 }
+
+.nav-item is-active {
+  visibility: hidden;
+}
+
+/* .login-and-sign-up-hidden {
+
+} */
 
 .product-preview {
   border: 2px solid black;

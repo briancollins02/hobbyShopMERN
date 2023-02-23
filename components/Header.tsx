@@ -1,45 +1,26 @@
-import { useContext, useState } from "react"
-import { UserContext } from "@/lib/client-context";
-import Link from "next/link" 
-import {useRouter} from "next/router";
+// Boilerplate imports
+import { useState } from "react";
 
-
-import CartPreview from "@/components/CartPreview";
+// import components
+import Navigation from './Navigation';
 
 const Header = () => {
-    const router = useRouter()
-    const userContext = useContext(UserContext);
-    console.log(userContext);
-    const [cartPreview, setCartPreview] = useState(false) 
-    const handleCartPreview = () => {
-        setCartPreview(true)
-    }
-    const handleLogout = async () => {
-        try {
-            // const logOutResponse = await fetch("/api/auth", {
-            //     method: "DELETE"
-            // })
-            // const logOutData = await logOutResponse.json();
-            localStorage.removeItem("authToken");
-            userContext.setUser(null);
-            router.push("/");   
-        } catch (err) {
-            console.log(err);
-            alert("Can not log out.")
-        }
-    };
 
     const [currentNav, handleNavChange] = useState("About");
 
     const renderNav = () => {
         switch(currentNav) {
+            case 'Sign Up':
+
+            case 'Login':
+                
             case 'About':
                 
             case 'Products':
                 
             case 'CartPreview':
                 
-            case 'Resume':
+            case 'Contact':
                 
 
             default:
@@ -49,30 +30,9 @@ const Header = () => {
 
     return (
         <header className="header">
-            {
-                userContext && userContext.user?
-                <div>
-                    <p>{userContext.user.first_name}</p>
-                    <button onClick = {handleCartPreview}>
-                        Cart
-                        <span>{userContext.user.cart.length}</span>
-                    </button>
-                    <button onClick = {handleLogout}>
-                        Logout
-                    </button>
-                    {cartPreview && <CartPreview setCartPreview = {setCartPreview}/>}
-                </div>
-                :
-                <div className="links-container">
-                    <Link href = "/sign-up" className="login-and-sign-up">
-                        Sign Up
-                    </Link>
-                    <Link href = "/log-in" className="login-and-sign-up">
-                        Login
-                    </Link>
-                </div>
-            }
+            <Navigation   currentPage={currentNav} handlePageChange={handleNavChange}> {renderNav(currentNav)} </Navigation>
         </header>
-    )
-}
+    );
+};
+
 export default Header;
