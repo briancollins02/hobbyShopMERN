@@ -2,6 +2,8 @@ import { useContext, useState } from "react"
 import { UserContext } from "@/lib/client-context";
 import Link from "next/link" 
 import {useRouter} from "next/router";
+
+
 import CartPreview from "@/components/CartPreview";
 
 const Header = () => {
@@ -25,7 +27,26 @@ const Header = () => {
             console.log(err);
             alert("Can not log out.")
         }
-    }
+    };
+
+    const [currentNav, handleNavChange] = useState("About");
+
+    const renderNav = () => {
+        switch(currentNav) {
+            case 'About':
+                
+            case 'Products':
+                
+            case 'CartPreview':
+                
+            case 'Resume':
+                
+
+            default:
+              
+        };
+    };
+
     return (
         <header className="header">
             {
