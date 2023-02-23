@@ -37,7 +37,7 @@ const Navigation = (props: any) => {
     const navButtons = ['About', 'Products', 'CartPreview', 'Contact'];
 
     return (
-        <header className="header">
+        <div className="navigation">
             {
                 userContext && userContext.user?
                 <div>
@@ -51,7 +51,9 @@ const Navigation = (props: any) => {
                     </button>
                     {cartPreview && <CartPreview setCartPreview = {setCartPreview}/>}
                 </div>
+                
                 :
+
                 <div className="links-container-div">
                     {navButtons.map((navButton) => (
                         <ul>
@@ -65,7 +67,7 @@ const Navigation = (props: any) => {
                     ))}
                 </div>
             }
-        </header>
+        </div>
     );
 };
 
