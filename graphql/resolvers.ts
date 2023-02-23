@@ -1,5 +1,5 @@
 import connectMongo from "@/db/connection";
-// import * as ApolloServerErrorCode from '@apollo/server/errors';
+import * as ApolloServerErrorCode from '@apollo/server/errors';
 import { GraphQLError } from "graphql";
 import User from "@/server/models/User";
 import Product from "@/server/models/Product";
@@ -40,6 +40,16 @@ export default {
             catch(err){
                 console.log(err);
                 return null;
+            }
+        },
+        users: async () => {
+            try {
+                await connectMongo();
+                const users = await User.find({});
+                return users
+            }
+            catch (err) {
+                console.log(err);
             }
         },
     },

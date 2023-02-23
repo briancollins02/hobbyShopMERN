@@ -2,27 +2,27 @@ import { gql } from "graphql-tag"
 
 export default gql`
     type User{
-        id: String!
-        first_name: String!
-        last_name: String!
-        address: String!
-        email: String!
-        password: String!
+        id: ID
+        first_name: String
+        last_name: String
+        address: String
+        email: String
+        password: String
         isAdmin: Boolean
         orders: [Order]
         cart: [Cart]
     }
     type Auth {
-        token: ID
+        token: ID!
         user: User
     }
     type Product{
-        id: String!
-        name: String!
-        description: String!
-        price: Float!
+        id: ID
+        name: String
+        description: String
+        price: Float
         quantity: Int
-        category: Category!
+        category: String
         images: [String]
         stripe_product_id: String!
         stripe_product_price_id: String!
@@ -31,6 +31,7 @@ export default gql`
         id: String!
         name: String!
         description: String!
+        products: [Product]
     }
     type CartItem{
         product: Product!

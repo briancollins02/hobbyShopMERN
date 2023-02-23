@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Cassette Tape",
+        "description": "this cassette is a test product",
+        "images": "https://media.npr.org/assets/img/2021/03/10/cassette-tape-ottens-dead_wide-62c6e8cc67474b87f89def0675ae067fe99e3e78-s1100-c50.jpg",
+        "price": 9.99,
+        "quantity": 99,
+        "category": "Music"
+    },
+    {
+        "name": "Warhammer 40k Fireteam",
+        "description": "A cut down quick and frantic version of the Warhammer 40,000 miniature game",
+        "images": "https://prodimage.images-bn.com/pimages/5011921157334_p2_v3_s600x595.jpg",
+        "price": 49.99,
+        "quantity": 40,
+        "category": "Miniature Games"
+    },
+    {
+        "name": "Magic: The Gathering - Innistrad: Crimson Vow Commander Deck - Vampiric Bloodline",
+        "description": "this cassette is a test product",
+        "images": "https://d1rw89lz12ur5s.cloudfront.net/photo/untappedgames/file/0af787358aa5486a91d873555a8e5b42/MTGVOW_EN_CmndrOtrBx_01_01.png",
+        "price": 39.95,
+        "quantity": 75,
+        "category": "Card Games"
+    },
+    {
+        "name": "Evil Hat Productions Blades In The Dark",
+        "description": "Blades in the Dark is a tabletop role-playing game about a crew of scoundrels seeking their fortunes on the haunted streets of an industrial-fantasy city. Heists, chases, occult mysteries, dangerous bargins, and riches to be had are in store for you and your fledgling crew.",
+        "images": "https://therewillbe.games/media/reviews/photos/original/3d/4c/6f/blades-in-the-dark-review-83-1597992614.jpg",
+        "price": 24.99,
+        "quantity": 64,
+        "category": "TTRPGS"
+    },
+    {
+        "name": "Twilight Imperium Fourth Edition",
+        "description": "Build an intergalactic empire through trade, research, conquest and grand politics.",
+        "images": "https://cf.geekdo-images.com/_Ppn5lssO5OaildSE-FgFA__opengraph/img/_JXhfuNwZRM0i79nIoMYzVQoiyk=/0x0:5233x2747/fit-in/1200x630/filters:strip_icc()/pic3727516.jpg",
+        "price": 129.99,
+        "quantity": 21,
+        "category": "Board Games"
+    }
+]

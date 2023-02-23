@@ -1,0 +1,18 @@
+[
+    {
+        "name": "Music",
+        "description": "Albums on Vinyl and Cassette"
+    },   {
+        "name": "Miniature Games",
+        "description": "War table top games played with miniature units"
+    },   {
+        "name": "Card Games",
+        "description": "Games played with playing cards, requiring no board"
+    },   {
+        "name": "TTRPGS",
+        "description": "Table-Top Role-Playing-Games, from rule books to battle maps"
+    },   {
+        "name": "Board Games",
+        "description": "Table-Top games played with player interaction happening on physical board space"
+    }
+]

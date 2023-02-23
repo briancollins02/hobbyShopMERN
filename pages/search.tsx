@@ -1,5 +1,5 @@
 import AddToCartWrapper from "@/components/AddToCartWrapper"
-// import { Products } from "@/lib/dummy-data"
+import { Products } from "@/lib/dummy-data"
 import graphqlClient from "@/lib/graphql-client";
 import gql from "graphql-tag";
 

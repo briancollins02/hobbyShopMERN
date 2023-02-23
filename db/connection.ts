@@ -18,7 +18,12 @@ export default async () => {
     }
     //if there is no connection then the promise is manually created, the .then is instructions for when the promise is fufilled. 
     if (!cachedConnection.promise){
-        cachedConnection.promise = mongoose.connect(process.env.MONGODB_URI as string).then((mongoose)=>mongoose)
+        cachedConnection.promise = mongoose.connect(process.env.MONGODB_URI as string || 'mongodb://127.0.0.1:27017/programming-thoughts',
+        {
+            useNewUrlParser: true,
+            //     useUnifiedTopology: true,
+        })
+        .then((mongoose)=>mongoose)
     }
     //creating a new connection
     cachedConnection.conn = await cachedConnection.promise

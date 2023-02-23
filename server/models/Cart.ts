@@ -9,10 +9,7 @@ const cartSchema = new Schema({
         {
             productId: {
                 type: Schema.Types.ObjectId,
-<<<<<<< HEAD:server/models/Cart.ts
-=======
                 ref: 'Product',
->>>>>>> d3b230df824854f48160d2470716a0e2c8f79ab0:server/models/Cart.js
             },
             quantity: {
                 type: Number,
