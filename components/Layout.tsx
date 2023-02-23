@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import { UserProvider } from "@/lib/client-context"
 
 // Import components
-import Header from "./Header"
+// import Header from "./Header"
 import Footer from "./Footer"
 
 import graphqlClient from "@/lib/graphql-client";
@@ -49,7 +49,6 @@ const Layout = (props: Props) => {
 
     return (
         <UserProvider value={{ user, setUser }}>
-            <Header />
             <main>
                 {props.children}
             </main>

@@ -7,7 +7,7 @@ import {useRouter} from "next/router";
 
 import CartPreview from "../CartPreview";
 
-const AboutNav = (props: any) => {
+const AboutNav = () => {
     const router = useRouter()
     const userContext = useContext(UserContext);
     console.log(userContext);

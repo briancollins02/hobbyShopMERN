@@ -1,36 +1,36 @@
 // Boilerplate imports
-import React from 'react'
+// import React, { useState } from 'react'
 
 // Import dynamic navigation components
-import AboutNav from "./dynamicNavs/AboutNav";
-import CartPreviewNav from "./dynamicNavs/CartPreviewNav";
-import ContactNav from "./dynamicNavs/ContactNav";
-import ProductsNav from "./dynamicNavs/ProductsNav";
+// import AboutNav from "./dynamicNavs/AboutNav";
+// import CartPreviewNav from "./dynamicNavs/CartPreviewNav";
+// import ContactNav from "./dynamicNavs/ContactNav";
+// import ProductsNav from "./dynamicNavs/ProductsNav";
 
 
-const Navigation = (props: any) => {
+// const Navigation = () => {
 
-    const currentNav= props.currentNav;
+//     const [ currentNav, setCurrentNav] = useState('AboutNav');
 
-        switch (currentNav) {
+//         switch (currentNav) {
             
-            case 'AboutNav':
-                return <AboutNav currentNav={currentNav} />;
+//             case 'AboutNav':
+//                 return <AboutNav currentNav={setCurrentNav} />;
 
-            case 'ProductsNav':
-                return <ProductsNav currentNav={currentNav} />;
+//             case 'ProductsNav':
+//                 return <ProductsNav currentNav={setCurrentNav} />;
 
-            case 'CartPreviewNav':
-                return <CartPreviewNav currentNav={currentNav} />;
+//             case 'CartPreviewNav':
+//                 return <CartPreviewNav currentNav={setCurrentNav} />;
 
-            case 'ContactNav':
-                return <ContactNav currentNav={currentNav} />;
+//             case 'ContactNav':
+//                 return <ContactNav currentNav={setCurrentNav} />;
 
-            default:
-                'AboutNav'
-                    return <AboutNav currentNav={currentNav} />;
-        };
-};
+//             default:
+//                 'AboutNav'
+//                     return <AboutNav currentNav={setCurrentNav} />;
+//         };
+// };
 
-export default Navigation;
+// export default Navigation;
 
